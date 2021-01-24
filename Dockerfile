@@ -30,8 +30,7 @@ RUN apk add mariadb mariadb-client \
     php7-apcu \
     php7-opcache \
     php7-tokenizer \
-    php7-simplexml \
-    vim
+    php7-simplexml
 
 # add openssh and clean
 RUN apk add --update openssh \
