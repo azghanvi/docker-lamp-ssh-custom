@@ -1,6 +1,9 @@
 ## Docker with LAMP + SSH stack based on Alpine Linux
 
-Really Lightweight 291mb Docker image with lamp, ssh, phpmyadmin (with tunnel access)
+A Lightweight 291mb Docker image with 
+- lamp
+- ssh
+- phpmyadmin (with tunnel access)
 
 ## Installation
 ### Grab from docker hub
