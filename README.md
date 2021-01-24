@@ -25,16 +25,12 @@ docker build -t azg/docker-lamp-ssh-291m .
 ```
 docker run --name container1 -d -p 41061:22 --expose 80 -e MYSQL_ROOT_PASSWORD=root -e SSH_ROOT_PASSWORD=test azg/docker-lamp-ssh-291m
 
+```
+
 or if you have setup nginx-proxy:
 
+```
 docker run --name container1 -d -p 41061:22 --expose 80 -e MYSQL_ROOT_PASSWORD=root -e SSH_ROOT_PASSWORD=test -e VIRTUAL_HOST=domain.com --net nginx-proxy azg/adocker-lamp-ssh-291m
 
+```
 You can adjust MYSQL_ROOT_PASSWORD, SSH_ROOT_PASSWORD, VIRTUAL_HOST and container name.
-
-```
-
-### Connect to MariaDB
-To use this you need to install mysql/mariadb cli client
-```
-mysql -uroot -ppassword -h 127.0.0.1
-```
