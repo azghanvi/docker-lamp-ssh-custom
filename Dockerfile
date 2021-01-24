@@ -30,7 +30,8 @@ RUN apk add mariadb mariadb-client \
     php7-apcu \
     php7-opcache \
     php7-tokenizer \
-    php7-simplexml
+    php7-simplexml \
+    vim
 
 # add openssh and clean
 RUN apk add --update openssh \
@@ -40,14 +41,12 @@ RUN rm -rf /etc/ssh/ssh_host_rsa_key /etc/ssh/ssh_host_dsa_key
 RUN sed -ri 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/g' /etc/ssh/sshd_config
 RUN sed -ri 's/AllowTcpForwarding no/AllowTcpForwarding yes/g' /etc/ssh/sshd_config
 
-
-#UN curl -sS https://getcomposer.org/installer | \
+#RUN curl -sS https://getcomposer.org/installer | \
 #   php -- --install-dir=/usr/bin --filename=composer
 
-#
-#    sed -i 's#AllowOverride none#AllowOverride All#' /etc/apache2/httpd.conf && \
-#    sed -i 's#Require all denied#Require all granted#' /etc/apache2/httpd.conf && \
-#    sed -i 's#^DocumentRoot ".*#DocumentRoot "/var/www/localhost/htdocs"#g' /etc/apache2/httpd.conf && \
+RUN sed -i 's#AllowOverride none#AllowOverride All#i' /etc/apache2/httpd.conf && \
+    sed -i 's#Require all denied#Require all granted#i' /etc/apache2/httpd.conf && \
+    sed -i 's#^DocumentRoot ".*#DocumentRoot "/var/www/localhost/htdocs"#g' /etc/apache2/httpd.conf && \
 
 # configure timezone, mysql, apache
 RUN cp /usr/share/zoneinfo/${TIMEZONE} /etc/localtime && \
@@ -56,7 +55,6 @@ RUN cp /usr/share/zoneinfo/${TIMEZONE} /etc/localtime && \
     mkdir -p /run/apache2 && chown -R apache:apache /run/apache2 && chown -R apache:apache /var/www/localhost/htdocs/ && \
     sed -i 's#\#LoadModule rewrite_module modules\/mod_rewrite.so#LoadModule rewrite_module modules\/mod_rewrite.so#' /etc/apache2/httpd.conf && \
     sed -i 's#ServerName www.example.com:80#\nServerName localhost:80#' /etc/apache2/httpd.conf && \
-    sed -ri 's/AllowOverride None/AllowOverride All/g' /etc/apache2/httpd.conf && \
     sed -i 's/skip-networking/\#skip-networking/i' /etc/my.cnf.d/mariadb-server.cnf && \
     sed -i '/mariadb\]/a log_error = \/var\/lib\/mysql\/error.log' /etc/my.cnf.d/mariadb-server.cnf && \
     sed -i -e"s/^bind-address\s*=\s*127.0.0.1/bind-address = 0.0.0.0/" /etc/my.cnf.d/mariadb-server.cnf && \
