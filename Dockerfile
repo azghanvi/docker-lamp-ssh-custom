@@ -45,8 +45,8 @@ RUN sed -ri 's/AllowTcpForwarding no/AllowTcpForwarding yes/g' /etc/ssh/sshd_con
 #   php -- --install-dir=/usr/bin --filename=composer
 
 RUN sed -i 's#AllowOverride none#AllowOverride All#i' /etc/apache2/httpd.conf && \
-    sed -i 's#Require all denied#Require all granted#i' /etc/apache2/httpd.conf && \
-    sed -i 's#^DocumentRoot ".*#DocumentRoot "/var/www/localhost/htdocs"#g' /etc/apache2/httpd.conf && \
+    sed -i 's#Require all denied#Require all granted#i' /etc/apache2/httpd.conf
+    # sed -i 's#^DocumentRoot ".*#DocumentRoot "/var/www/localhost/htdocs"#g' /etc/apache2/httpd.conf
 
 # configure timezone, mysql, apache
 RUN cp /usr/share/zoneinfo/${TIMEZONE} /etc/localtime && \
