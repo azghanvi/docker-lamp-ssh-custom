@@ -85,7 +85,7 @@ WORKDIR /var/www/localhost/htdocs/
 
 # download phpmyadmin
 RUN wget "https://files.phpmyadmin.net/phpMyAdmin/5.0.4/phpMyAdmin-5.0.4-english.zip" && \
-unzip phpMyAdmin-5.0.4-english.zip && \
+unzip -q phpMyAdmin-5.0.4-english.zip && \
 mv phpMyAdmin-5.0.4-english phpmyadmin && \
 rm phpMyAdmin-5.0.4-english.zip
 
