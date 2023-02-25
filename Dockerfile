@@ -30,7 +30,14 @@ RUN apk add mariadb mariadb-client \
     php7-apcu \
     php7-opcache \
     php7-tokenizer \
-    php7-simplexml
+    php7-simplexml \
+    vim \
+    nano \
+    htop \
+    mc
+    
+# enable ll
+RUN alias ll="ls -al"
 
 # add openssh and clean
 RUN apk add --update openssh \
