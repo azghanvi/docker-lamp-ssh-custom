@@ -1,4 +1,4 @@
-FROM alpine:3.16
+FROM php:7.4-fpm-alpine3.15
 ENV TIMEZONE America/Santiago
 
 RUN apk update && apk upgrade
